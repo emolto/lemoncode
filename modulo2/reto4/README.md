@@ -16,6 +16,12 @@ CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS 
 1f6ea215ca14   frontend:prod   "docker-entrypoint.s…"   11 seconds ago   Up 9 seconds    0.0.0.0:3000->3000/tcp, [::]:3000->3000/tcp       frontend
 eaad2ec8e936   backend:prod    "docker-entrypoint.s…"   11 seconds ago   Up 9 seconds    0.0.0.0:5000->5000/tcp, [::]:5000->5000/tcp       backend
 4de1ae510a64   mongo:latest    "docker-entrypoint.s…"   11 seconds ago   Up 10 seconds   0.0.0.0:27017->27017/tcp, [::]:27017->27017/tcp   mongodb
+
+> docker-compose ps
+NAME       IMAGE           COMMAND                  SERVICE    CREATED             STATUS             PORTS
+backend    backend:prod    "docker-entrypoint.s…"   backend    About an hour ago   Up About an hour   0.0.0.0:5000->5000/tcp, [::]:5000->5000/tcp
+frontend   frontend:prod   "docker-entrypoint.s…"   frontend   About an hour ago   Up About an hour   0.0.0.0:3000->3000/tcp, [::]:3000->3000/tcp
+mongodb    mongo:latest    "docker-entrypoint.s…"   mongodb    About an hour ago   Up About an hour   0.0.0.0:27017->27017/tcp, [::]:27017->27017/tcp
 ```
 
 ## Log de backend tras el inicio
