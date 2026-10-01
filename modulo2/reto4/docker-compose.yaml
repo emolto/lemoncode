@@ -1,4 +1,6 @@
+# declaracion de los contenedores a iniciar
 services:
+  # contenedor para mongodb
   mongodb:
     container_name: "mongodb"
     image: "mongo:latest"
@@ -9,36 +11,47 @@ services:
     volumes:
       - mongo-data:/data/db
     restart: "unless-stopped"
+  # contenedor para backend
   backend:
     container_name: "backend"
     image: backend:prod
+    # las variables de entorno las definimos en un archivo
     env_file:
       - "./backend/.env"
     ports:
       - "5000:5000"
     networks:
       - lemoncode-net
+    # servicio dependiente de mongodb
     depends_on:
       - mongodb
     restart: "unless-stopped"
+  # contenedor para frontend
   frontend:
     container_name: "frontend"
     image: "frontend:prod"
+    # en este caso las variables de entorno las definimos directamente
     environment:
       API_URL: "http://backend:5000/api/classes"
     ports:
       - "3000:3000"
     networks:
       - lemoncode-net
+    # servicio dependiente del backend
     depends_on:
       - backend
     restart: "unless-stopped"
 
+# declaracion de los volumenes utilizados por los contenedores
+# se indica 'external: true' ya que no queremos destruirlo al detener los contenedores con docker-compose down ya que buscamos la persistenia de datos.
+# el volumen se crea separadamente de los contenedores mediante el comando: 
+#         ```docker volume create mongo-data```
 volumes:
   mongo-data:
     name: mongo-data
     external: true
 
+# declaracion de las redes utilizadas por los contenedores
 networks:
   lemoncode-net:
     name: lemoncode-net
