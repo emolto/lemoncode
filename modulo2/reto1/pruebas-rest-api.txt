@@ -1,0 +1,143 @@
+##############################################################################################################
+# Obtener las classes disponibles
+##############################################################################################################
+> curl -v -X GET http://localhost:5000/api/classes
+Note: Unnecessary use of -X or --request, GET is already inferred.
+* Host localhost:5000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:5000...
+* Established connection to localhost (::1 port 5000) from ::1 port 21469
+* using HTTP/1.x
+> GET /api/classes HTTP/1.1
+> Host: localhost:5000
+> User-Agent: curl/8.21.0
+> Accept: */*
+>
+* Request completely sent off
+< HTTP/1.1 200 OK
+< X-Powered-By: Express
+< Access-Control-Allow-Origin: *
+< Content-Type: application/json; charset=utf-8
+< Content-Length: 568
+< ETag: W/"238-u/MwOKU7TEGiPmNsAQ3CrRvXOro"
+< Date: Thu, 01 Oct 2026 22:58:11 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+<
+[{"_id":"6abed12f873327883963311c","name":"Contenedores I","instructor":"Gisela Torres","startDate":"2026-10-01T18:00:00Z","endDate":"2026-10-15T20:00:00Z","duration":2,"level":"Beginner"},{"_id":"6abed147873327883963311d","name":"Contenedores II","instructor":"Gisela Torres","startDate":"2026-10-16T18:00:00Z","endDate":"2026-10-20T20:00:00Z","duration":2,"level":"Beginner"},{"_id":"6abed280873327883963311e","name":"Contenedores III","instructor":"Gisela Torres","startDate":"2026-10-21T18:00:00Z","endDate":"2026-10-31T20:00:00Z","duration":2,"level":"Beginner"}]* Connection #0 to host localhost:5000 left intact
+
+##############################################################################################################
+# Obtener una clase por id
+##############################################################################################################
+> curl -v -X GET http://localhost:5000/api/classes/6abed280873327883963311e
+Note: Unnecessary use of -X or --request, GET is already inferred.
+* Host localhost:5000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:5000...
+* Established connection to localhost (::1 port 5000) from ::1 port 50663
+* using HTTP/1.x
+> GET /api/classes/6abed280873327883963311e HTTP/1.1
+> Host: localhost:5000
+> User-Agent: curl/8.21.0
+> Accept: */*
+>
+* Request completely sent off
+< HTTP/1.1 200 OK
+< X-Powered-By: Express
+< Access-Control-Allow-Origin: *
+< Content-Type: application/json; charset=utf-8
+< Content-Length: 189
+< ETag: W/"bd-43ovH6eqvQBc8Tc6iCBLzJ2k748"
+< Date: Thu, 01 Oct 2026 23:01:32 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+<
+{"_id":"6abed280873327883963311e","name":"Contenedores III","instructor":"Gisela Torres","startDate":"2026-10-21T18:00:00Z","endDate":"2026-10-31T20:00:00Z","duration":2,"level":"Beginner"}* Connection #0 to host localhost:5000 left intact
+
+##############################################################################################################
+# Añadir una clase
+##############################################################################################################
+> curl -v -X POST http://localhost:5000/api/classes -H "Content-Type: application/json" -d'{"name":"Contenedores IV","instructor":"Gisela Torres","startDate":"2026-11-01T18:00:00Z","endDate":"2026-11-05T20:00:00Z","duration":2,"level":"Beginner"}'
+Note: Unnecessary use of -X or --request, POST is already inferred.
+* Host localhost:5000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:5000...
+* Established connection to localhost (::1 port 5000) from ::1 port 50659
+* using HTTP/1.x
+> POST /api/classes HTTP/1.1
+> Host: localhost:5000
+> User-Agent: curl/8.21.0
+> Accept: */*
+> Content-Type: application/json
+> Content-Length: 155
+>
+* upload completely sent off: 155 bytes
+< HTTP/1.1 201 Created
+< X-Powered-By: Express
+< Access-Control-Allow-Origin: *
+< Content-Type: application/json; charset=utf-8
+< Content-Length: 188
+< ETag: W/"bc-V/cGf19uRN8ngA/FpBloCJWXQ3Y"
+< Date: Thu, 01 Oct 2026 23:00:02 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+<
+{"_id":"6abee5f29647c266b9cdcb0e","name":"Contenedores IV","instructor":"Gisela Torres","startDate":"2026-11-01T18:00:00Z","endDate":"2026-11-05T20:00:00Z","duration":2,"level":"Beginner"}* Connection #0 to host localhost:5000 left intact
+
+##############################################################################################################
+# Eliminar una clase
+##############################################################################################################
+> curl -v -X DELETE http://localhost:5000/api/classes/6abee5f29647c266b9cdcb0e
+* Host localhost:5000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:5000...
+* Established connection to localhost (::1 port 5000) from ::1 port 21465
+* using HTTP/1.x
+> DELETE /api/classes/6abee5f29647c266b9cdcb0e HTTP/1.1
+> Host: localhost:5000
+> User-Agent: curl/8.21.0
+> Accept: */*
+>
+* Request completely sent off
+< HTTP/1.1 204 No Content
+< X-Powered-By: Express
+< Access-Control-Allow-Origin: *
+< Date: Thu, 01 Oct 2026 22:57:23 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+<
+* Connection #0 to host localhost:5000 left intact
+
+##############################################################################################################
+# Modificar una clase
+##############################################################################################################
+> curl -v -X PUT http://localhost:5000/api/classes/6abed12f873327883963311c -H "Content-Type: application/json" -d'{"name":"Contenedores I","instructor":"Nuevo Instructor","startDate":"2026-10-01T18:00:00Z","endDate":"2026-10-15T20:00:00Z","duration":2,"level":"Intermediate"}'
+* Host localhost:5000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:5000...
+* Established connection to localhost (::1 port 5000) from ::1 port 45267
+* using HTTP/1.x
+> PUT /api/classes/6abed12f873327883963311c HTTP/1.1
+> Host: localhost:5000
+> User-Agent: curl/8.21.0
+> Accept: */*
+> Content-Type: application/json
+> Content-Length: 161
+>
+* upload completely sent off: 161 bytes
+< HTTP/1.1 200 OK
+< X-Powered-By: Express
+< Access-Control-Allow-Origin: *
+< Content-Type: application/json; charset=utf-8
+< Content-Length: 194
+< ETag: W/"c2-1kxPp2SQRa2OU2gEocVAQxQLxp4"
+< Date: Thu, 01 Oct 2026 23:04:10 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+<
+{"_id":"6abed12f873327883963311c","name":"Contenedores I","instructor":"Nuevo Instructor","startDate":"2026-10-01T18:00:00Z","endDate":"2026-10-15T20:00:00Z","duration":2,"level":"Intermediate"}* Connection #0 to host localhost:5000 left intact

@@ -1,0 +1,44 @@
+services:
+  mongodb:
+    container_name: "mongodb"
+    image: "mongo:latest"
+    ports:
+      - "27017:27017"
+    networks:
+      - lemoncode-net
+    volumes:
+      - mongo-data:/data/db
+    restart: "unless-stopped"
+  backend:
+    container_name: "backend"
+    image: backend:prod
+    env_file:
+      - "./backend/.env"
+    ports:
+      - "5000:5000"
+    networks:
+      - lemoncode-net
+    depends_on:
+      - mongodb
+    restart: "unless-stopped"
+  frontend:
+    container_name: "frontend"
+    image: "frontend:prod"
+    environment:
+      API_URL: "http://backend:5000/api/classes"
+    ports:
+      - "3000:3000"
+    networks:
+      - lemoncode-net
+    depends_on:
+      - backend
+    restart: "unless-stopped"
+
+volumes:
+  mongo-data:
+    name: mongo-data
+    external: true
+
+networks:
+  lemoncode-net:
+    name: lemoncode-net
