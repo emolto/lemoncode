@@ -23,7 +23,6 @@ CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS   
 ```
 
 ## volúmenes de docker
-##############################################################################################################
 ```
 > docker volume ls
 DRIVER    VOLUME NAME
